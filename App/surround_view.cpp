@@ -33,7 +33,10 @@ using namespace glm;
 #include "texture.hpp"
 #include "objloader.hpp"
 
+#include <time.h>
 
+
+// Variables
 int i;
 int prev;
 int change_mesh = 0;
@@ -49,6 +52,20 @@ std::vector<std::vector<glm::vec3> > v(100);
 std::vector<std::vector<glm::vec2> > u(100);
 std::vector<std::vector<glm::vec3> > n(100);
 std::vector<std::string> obj_names;
+
+// to measure fps
+struct timespec tpstart;
+struct timespec tpend;
+float diff_sec, diff_nsec;
+int num_f;
+float sum_time, max_time;
+
+struct timespec tp_start_10;
+struct timespec tp_now_10;
+int frame_ctr;
+float fps;
+float total_nsec;
+
 
 std::string cam_View = "S";
 
@@ -620,10 +637,11 @@ int main(int argc, char** argv)
 	glm::vec3 center_rr(0.0f, 0.0f, 0.0f);
 	
 ///////////////////////////////////////////////////////////////////////////////////////////
-
+    
+    // With LiDAR data
+    /*
     int count = 0;
     int lidar_count = 1;
-
     
 	IplImage *mesh_pic0;
 	IplImage *mesh_pic1;
@@ -646,11 +664,47 @@ int main(int argc, char** argv)
     cam_back = cvLoadImage("camView_pics/back_cam.png", CV_LOAD_IMAGE_COLOR);
     cam_right = cvLoadImage("camView_pics/right_cam.png", CV_LOAD_IMAGE_COLOR);
     cam_top = cvLoadImage("camView_pics/top_cam.png", CV_LOAD_IMAGE_COLOR);
-	
+    */
+
+    // To meausure fps performance
+    float lastTime = glfwGetTime();
+    int nbFrames = 0;
+    
+    clock_gettime(CLOCK_MONOTONIC, &tpstart);
+    int frame_id;
+
     // main loop
     do{
 		//usleep(10000);
-        printf("argc = %d\n", argc);
+        
+        /* ***** START TIMING ***** */   
+        clock_gettime(CLOCK_MONOTONIC, &tpstart);
+        //printf("%ld %ld\n", tpstart.tv_sec, tpstart.tv_nsec);
+        /* ***** START TIMING ***** */ 
+        
+		frame_ctr++;
+        if(frame_ctr == 10)
+        {
+            clock_gettime(CLOCK_MONOTONIC, &tp_now_10);
+            diff_sec = tp_now_10.tv_sec - tp_start_10.tv_sec;
+            diff_nsec = tp_now_10.tv_nsec - tp_start_10.tv_nsec;
+            total_nsec = diff_sec * 1000000000 + diff_nsec;
+            fps = 10 / (total_nsec / 1000000000);
+            std::cout << "FPS: " << fps << std::endl;
+            frame_ctr = 0;
+            clock_gettime(CLOCK_MONOTONIC, &tp_start_10);
+        }
+        frame_id++;
+		//usleep(10000);
+		double currentTime = glfwGetTime();
+		nbFrames++;
+		if (currentTime - lastTime >= 1.0) {
+			//printf("%d fps\n", nbFrames);
+			nbFrames = 0;
+			lastTime += 1.0;
+		}
+
+
 		if (change_mesh) {
 			change_mesh = 0;
 			load_VBO_v(vertexbuffer);
@@ -693,7 +747,6 @@ int main(int argc, char** argv)
 		}
 
 		if (video_demo && px2) {
-			printf("video frame %d ----------\n", count++);
             
             /* 
             std::string line;
@@ -1240,9 +1293,32 @@ int main(int argc, char** argv)
 		glDeleteTextures(1, &Texture3);
 		glDeleteTextures(1, &Texture4);
 
+		/* ***** END TIMING ***** */ 
+        clock_gettime(CLOCK_MONOTONIC, &tpend);
+        //printf("%ld %ld\n", tpend.tv_sec, tpend.tv_nsec);
+        /*std::sort(flow.begin(), flow.end());
+        if (flow.size() > 0)
+            medianFlow = flow[flow.size()/2];
+        */
+        diff_sec = tpend.tv_sec - tpstart.tv_sec;
+        diff_nsec = tpend.tv_nsec - tpstart.tv_nsec; 
+        total_nsec = diff_sec * 1000000000 + diff_nsec;
+        if(frame_id > 50)
+        {
+            if(total_nsec > max_time)
+                max_time = total_nsec;
+            sum_time += total_nsec;
+            num_f++;
+        }
+        /* ***** END TIMING ***** */
+
+
 	} // Check if the ESC key was pressed or the window was closed
 	while( glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS &&
 		   glfwWindowShouldClose(window) == 0 );
+
+    std::cout << sum_time << " ns \t" << num_f << " frames \t" << sum_time / num_f  << " ns \t" << sum_time / num_f / 1000000 << " ms" << std::endl;
+    std::cout << max_time << " ns \t" << max_time / 1000000 << " ms" << std::endl;
 
 	// Cleanup VBO and shader
 	glDeleteBuffers(1, &vertexbuffer);
