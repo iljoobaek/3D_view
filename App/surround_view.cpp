@@ -449,12 +449,36 @@ int main(int argc, char** argv)
 	bool res5 = loadOBJ("cadillac_measured.obj", vertices5, uvs5, normals5);*/
 
 	char * vid_common = "highway.mp4";
-
+    
+    /*
 	char * vid_front = "../data/Testing_0808/forbes.h264_0";
 	char * vid_left = "../data/Testing_0808/forbes.h264_1";
 	char * vid_rear = "../data/Testing_0808/forbes.h264_2";
     char * vid_right = "../data/Testing_0808/forbes.h264_3";
-	
+	*/
+    
+    // 640 x 480 resolution
+    /*
+	char * vid_front = "../data/Evaluation/forbes_640_480_0.mp4";
+	char * vid_left = "../data/Evaluation/forbes_640_480_1.mp4";
+	char * vid_rear = "../data/Evaluation/forbes_640_480_2.mp4";
+	char * vid_right = "../data/Evaluation/forbes_640_480_3.mp4";
+    */
+
+    // 1280 x 720 resolution
+	/*
+    char * vid_front = "../data/Evaluation/forbes_1280_720_0.mp4";
+	char * vid_left = "../data/Evaluation/forbes_1280_720_1.mp4";
+	char * vid_rear = "../data/Evaluation/forbes_1280_720_2.mp4";
+	char * vid_right = "../data/Evaluation/forbes_1280_720_3.mp4";
+    */
+
+    // 1920 x 1080 resolution
+	char * vid_front = "../data/Evaluation/forbes_1920_1080_0.mp4";
+	char * vid_left = "../data/Evaluation/forbes_1920_1080_1.mp4";
+	char * vid_rear = "../data/Evaluation/forbes_1920_1080_2.mp4";
+	char * vid_right = "../data/Evaluation/forbes_1920_1080_3.mp4";
+    
     /*
 	char * vid_front = "../Testing_0711/out5.h264_0";
 	char * vid_left = "../Testing_0711/out5.h264_1";
