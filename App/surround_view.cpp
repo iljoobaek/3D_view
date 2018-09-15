@@ -450,48 +450,54 @@ int main(int argc, char** argv)
 
 	char * vid_common = "highway.mp4";
     
-    /*
-	char * vid_front = "../data/Testing_0808/forbes.h264_0";
-	char * vid_left = "../data/Testing_0808/forbes.h264_1";
-	char * vid_rear = "../data/Testing_0808/forbes.h264_2";
-    char * vid_right = "../data/Testing_0808/forbes.h264_3";
-	*/
+    char * vid_front;
+	char * vid_left;
+	char * vid_rear;
+	char * vid_right;
     
-    // 640 x 480 resolution
-    /*
-	char * vid_front = "../data/Evaluation/forbes_640_480_0.mp4";
-	char * vid_left = "../data/Evaluation/forbes_640_480_1.mp4";
-	char * vid_rear = "../data/Evaluation/forbes_640_480_2.mp4";
-	char * vid_right = "../data/Evaluation/forbes_640_480_3.mp4";
-    */
+    int video_res;
+    if (argc == 1) {
+        video_res = -1;
+    }
+    else {
+        video_res = atoi(argv[1]);
+    }
 
-    // 1280 x 720 resolution
-	/*
-    char * vid_front = "../data/Evaluation/forbes_1280_720_0.mp4";
-	char * vid_left = "../data/Evaluation/forbes_1280_720_1.mp4";
-	char * vid_rear = "../data/Evaluation/forbes_1280_720_2.mp4";
-	char * vid_right = "../data/Evaluation/forbes_1280_720_3.mp4";
-    */
+    if (video_res == 0) {
+        // 1920 x 1208 resolution
+	    vid_front = "../data/Evaluation/short/forbes_1920_1208_0_s.mp4";
+	    vid_left = "../data/Evaluation/short/forbes_1920_1208_1_s.mp4";
+	    vid_rear = "../data/Evaluation/short/forbes_1920_1208_2_s.mp4";
+	    vid_right = "../data/Evaluation/short/forbes_1920_1208_3.mp4";
+    }
+    else if (video_res == -1) {
+	    vid_front = "../data/Testing_0808/forbes.h264_0";
+	    vid_left = "../data/Testing_0808/forbes.h264_1";
+	    vid_rear = "../data/Testing_0808/forbes.h264_2";
+        vid_right = "../data/Testing_0808/forbes.h264_3";
+    }    
+    else if (video_res == 1) {
+        // 1280 x 720 resolution
+        vid_front = "../data/Evaluation/short/forbes_1280_720_0_s.mp4";
+	    vid_left = "../data/Evaluation/short/forbes_1280_720_1_s.mp4";
+	    vid_rear = "../data/Evaluation/short/forbes_1280_720_2_s.mp4";
+	    vid_right = "../data/Evaluation/short/forbes_1280_720_3_s.mp4";
+    }
+    else if (video_res == 2) {
+        // 640 x 480 resolution
+	    vid_front = "../data/Evaluation/short/forbes_640_480_0_s.mp4";
+	    vid_left = "../data/Evaluation/short/forbes_640_480_1_s.mp4";
+	    vid_rear = "../data/Evaluation/short/forbes_640_480_2_s.mp4";
+	    vid_right = "../data/Evaluation/short/forbes_640_480_3_s.mp4";
+    }
+    else {
+        // 1920 x 1080 resolution h264
+	    vid_front = "../data/Testing_0808/forbes.h264_0";
+	    vid_left = "../data/Testing_0808/forbes.h264_1";
+	    vid_rear = "../data/Testing_0808/forbes.h264_2";
+        vid_right = "../data/Testing_0808/forbes.h264_3";
+    }
 
-    // 1920 x 1080 resolution
-	char * vid_front = "../data/Evaluation/forbes_1920_1080_0.mp4";
-	char * vid_left = "../data/Evaluation/forbes_1920_1080_1.mp4";
-	char * vid_rear = "../data/Evaluation/forbes_1920_1080_2.mp4";
-	char * vid_right = "../data/Evaluation/forbes_1920_1080_3.mp4";
-    
-    /*
-	char * vid_front = "../Testing_0711/out5.h264_0";
-	char * vid_left = "../Testing_0711/out5.h264_1";
-	char * vid_rear = "../Testing_0711/out5.h264_2";
-	char * vid_right = "../Testing_0711/out5.h264_3";
-    */
-
-    /*
-	char * vid_front = "../Testing_0711/fifth_ave2.h264_0";
-	char * vid_left = "../Testing_0711/fifth_ave2.h264_1";
-	char * vid_rear = "../Testing_0711/fifth_ave2.h264_2";
-	char * vid_right = "../Testing_0711/fifth_ave2.h264_3";
-    */
 
 
     if (video_demo) {
@@ -691,6 +697,9 @@ int main(int argc, char** argv)
     */
 
     // To meausure fps performance
+    sum_time = 0;
+    max_time = 0;
+
     float lastTime = glfwGetTime();
     int nbFrames = 0;
     
@@ -723,7 +732,7 @@ int main(int argc, char** argv)
 		double currentTime = glfwGetTime();
 		nbFrames++;
 		if (currentTime - lastTime >= 1.0) {
-			//printf("%d fps\n", nbFrames);
+			printf("%d fps\n", nbFrames);
 			nbFrames = 0;
 			lastTime += 1.0;
 		}
@@ -1335,7 +1344,6 @@ int main(int argc, char** argv)
             num_f++;
         }
         /* ***** END TIMING ***** */
-
 
 	} // Check if the ESC key was pressed or the window was closed
 	while( glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS &&
