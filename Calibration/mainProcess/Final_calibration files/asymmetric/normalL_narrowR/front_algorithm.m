@@ -1,17 +1,17 @@
-x_mesh_back_u = [-2.151, 0, 2.631];
+x_mesh_back_u = [-2.631, 0, 2.151];
 y_mesh_back_u = [4.343, 4.343, 4.343];
 z_mesh_back_u = [0.9659, 0.9659, 0.9659];
 
-x_mesh_back_r = [2.52, 1.954, 1.337, 0.72];
-y_mesh_back_r = [4.16, 3.403, 2.576, 1.75];
+x_mesh_back_r = [2.04, 1.586, 1.215, 0.72];
+y_mesh_back_r = [4.16, 3.332, 2.654, 1.75];
 z_mesh_back_r = [0, 0, 0, 0];
 
 x_mesh_back_b = [0.54, 0.36, 0.18, 0, -0.18, -0.36, -0.54, -0.72];
 y_mesh_back_b = [1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75];
 z_mesh_back_b = [0, 0, 0, 0, 0, 0, 0, 0];
 
-x_mesh_back_l = [-1.215, -1.586, -2.04];
-y_mesh_back_l = [2.654, 3.332, 4.16];
+x_mesh_back_l = [-1.337, -1.954, -2.52];
+y_mesh_back_l = [2.576, 3.403, 4.16];
 z_mesh_back_l = [0, 0, 0];
 
 x_mesh_back_half1 = horzcat(x_mesh_back_u, x_mesh_back_r);
@@ -22,7 +22,7 @@ x_mesh_back_half2 = horzcat(x_mesh_back_b, x_mesh_back_l);
 y_mesh_back_half2 = horzcat(y_mesh_back_b, y_mesh_back_l);
 z_mesh_back_half2 = horzcat(z_mesh_back_b, z_mesh_back_l);
 
-x_mid = [-1.53, -1.02, -0.51, 0, 0.63, 1.26, 1.89, 0, 0];
+x_mid = [-1.89, -1.26, -0.63, 0, 0.51, 1.02, 1.53, 0, 0];
 y_mid = [4.16, 4.16, 4.16, 4.16, 4.16, 4.16, 4.16, 3.403, 2.576];
 z_mid = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 

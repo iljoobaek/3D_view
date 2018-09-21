@@ -1,17 +1,17 @@
-x_mesh_back_u = [-2.631, -2.631, -2.631];
-y_mesh_back_u = [-4.343, 0, 4.343];
-z_mesh_back_u = [0.9659, 0.9659, 0.9659];
+x_mesh_back_u = (-1) * [-2.151, -0.06417, 2.631, 2.631];
+y_mesh_back_u = (-1) * [4.343, 4.343, 4.343, 2.606];
+z_mesh_back_u = [0.9659, 0.9659, 0.9659, 0.9659];
 
-x_mesh_back_r = [-2.52, -1.954, -1.337, -0.72];
-y_mesh_back_r = [4.16, 3.403, 2.576, 1.75];
+x_mesh_back_r = (-1) * [2.52, 1.936, 1.352, 0.72];
+y_mesh_back_r = [2.496, 2.254, 2.012, 1.75];
 z_mesh_back_r = [0, 0, 0, 0];
 
-x_mesh_back_b = [-0.72, -0.72, -0.72, -0.72, -0.72, -0.72, -0.72, -0.72, -0.72, -0.72];
-y_mesh_back_b = [1.4, 1.05, 0.7, 0.35, 0, -0.35, -0.7, -1.05, -1.4, -1.75];
-z_mesh_back_b = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+x_mesh_back_b = (-1) * [0.5444, 0.3688, 0.1932, -0.01756, -0.1932, -0.3688, -0.5444, -0.72];
+y_mesh_back_b = (-1) * [1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75];
+z_mesh_back_b = [0, 0, 0, 0, 0, 0, 0, 0];
 
-x_mesh_back_l = [-1.337, -1.954, -2.52];
-y_mesh_back_l = [-2.576, -3.403, -4.16];
+x_mesh_back_l = (-1) * [-1.15, -1.61, -2.04];
+y_mesh_back_l = (-1) * [2.54, 3.37, 4.16];
 z_mesh_back_l = [0, 0, 0];
 
 x_mesh_back_half1 = horzcat(x_mesh_back_u, x_mesh_back_r);
@@ -22,9 +22,9 @@ x_mesh_back_half2 = horzcat(x_mesh_back_b, x_mesh_back_l);
 y_mesh_back_half2 = horzcat(y_mesh_back_b, y_mesh_back_l);
 z_mesh_back_half2 = horzcat(z_mesh_back_b, z_mesh_back_l);
 
-x_mid = [-2.52, -2.52, -2.52, -2.52, -2.52, -2.52, -2.52, -2.52, -2.52,  -1.954, -1.337];
-y_mid = [-3.328, -2.496, -1.664, -0.832, 0, 0.832, 1.664, 2.496, 3.328, 0, 0];
-z_mid = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+x_mid = (-1) * [-1.53, -1.01, -0.51, -0.06146, 0.6761, 1.291, 1.905, 2.52, -0.04723, -0.03299];
+y_mid = (-1) * [4.16, 4.16, 4.16, 4.16, 4.16, 4.16, 4.16, 4.16, 3.378, 2.597];
+z_mid = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 x_mesh_back = horzcat(x_mesh_back_half1, x_mesh_back_half2);
 x_mesh_back = horzcat(x_mesh_back, x_mid);
@@ -33,10 +33,10 @@ y_mesh_back = horzcat(y_mesh_back, y_mid);
 z_mesh_back = horzcat(z_mesh_back_half1, z_mesh_back_half2);
 z_mesh_back = horzcat(z_mesh_back, z_mid);
 
-x = x_clicked(1:31)';
-y = y_clicked(1:31)';
+x = x_clicked(1:29)';
+y = y_clicked(1:29)';
 
-points_clicked = 31;
+points_clicked = 29;
 
 % Thin plate spline algorithm
 zero_matrix = [0; 0; 0; 0];
@@ -90,11 +90,11 @@ z_new = v(3, n);
 v_new = vertcat(x_new, y_new);
 v_new = vertcat(v_new, z_new);
 
-x_bar_back = zeros(7332, 1);
-y_bar_back = zeros(7332, 1);
+x_bar_back = zeros(2603, 1);
+y_bar_back = zeros(2603, 1);
 
 count = 0;
-for i = 1:7332
+for i = 1:2603
     count = count + 1;
     image_zero (1, 1) = 1;
     if ((ismember(v(1, i), x_mesh_back(:)) == 1) && (ismember(v(2, i), y_mesh_back(:)) == 1) && (ismember(v(3, i), z_mesh_back(:)) == 1))
@@ -124,10 +124,8 @@ for i = 1:7332
         y_bar_back(i) = max(y_bar_back);
     end
 end
+x_bar_new_norm = abs(x_bar_back)./1920;
+y_bar_new_norm = abs(1 - (y_bar_back)./1208);
 
-% for live stream
-% x_bar_new_norm = abs(x_bar_back)./1920;
-% y_bar_new_norm = abs(1 - (y_bar_back)./1218);
-
-x_bar_new_norm = abs(1 - (x_bar_back)./1920);
-y_bar_new_norm = abs((y_bar_back)./1208);
+% x_bar_new_norm = abs(1 - (x_bar_back)./1920);
+% y_bar_new_norm = abs((y_bar_back)./1208);

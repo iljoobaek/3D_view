@@ -1,17 +1,17 @@
-x_mesh_back_u = [-2.631, -2.631, -2.631];
-y_mesh_back_u = [-4.343, 0, 4.343];
+x_mesh_back_u = [2.151, 2.151, 2.151];
+y_mesh_back_u = [4.343, 0, -4.343];
 z_mesh_back_u = [0.9659, 0.9659, 0.9659];
 
-x_mesh_back_r = [-2.52, -1.954, -1.337, -0.72];
-y_mesh_back_r = [4.16, 3.403, 2.576, 1.75];
+x_mesh_back_r = [2.04, 1.61, 1.15, 0.72];
+y_mesh_back_r = [-4.16, -3.37, -2.54, -1.75];
 z_mesh_back_r = [0, 0, 0, 0];
 
-x_mesh_back_b = [-0.72, -0.72, -0.72, -0.72, -0.72, -0.72, -0.72, -0.72, -0.72, -0.72];
-y_mesh_back_b = [1.4, 1.05, 0.7, 0.35, 0, -0.35, -0.7, -1.05, -1.4, -1.75];
+x_mesh_back_b = [0.72, 0.72, 0.72, 0.72, 0.72, 0.72, 0.72, 0.72, 0.72, 0.72];
+y_mesh_back_b = [-1.4, -1.05, -0.7, -0.35, 0, 0.35, 0.7, 1.05, 1.4, 1.75];
 z_mesh_back_b = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-x_mesh_back_l = [-1.337, -1.954, -2.52];
-y_mesh_back_l = [-2.576, -3.403, -4.16];
+x_mesh_back_l = [1.15, 1.61, 2.04];
+y_mesh_back_l = [2.54, 3.37, 4.16];
 z_mesh_back_l = [0, 0, 0];
 
 x_mesh_back_half1 = horzcat(x_mesh_back_u, x_mesh_back_r);
@@ -22,8 +22,8 @@ x_mesh_back_half2 = horzcat(x_mesh_back_b, x_mesh_back_l);
 y_mesh_back_half2 = horzcat(y_mesh_back_b, y_mesh_back_l);
 z_mesh_back_half2 = horzcat(z_mesh_back_b, z_mesh_back_l);
 
-x_mid = [-2.52, -2.52, -2.52, -2.52, -2.52, -2.52, -2.52, -2.52, -2.52,  -1.954, -1.337];
-y_mid = [-3.328, -2.496, -1.664, -0.832, 0, 0.832, 1.664, 2.496, 3.328, 0, 0];
+x_mid = [2.04, 2.04, 2.04, 2.04, 2.04, 2.04, 2.04, 2.04, 2.04,  1.954, 1.337];
+y_mid = [3.328, 2.496, 1.664, 0.832, 0, -0.832, -1.664, -2.496, -3.328, 0, 0];
 z_mid = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 x_mesh_back = horzcat(x_mesh_back_half1, x_mesh_back_half2);
@@ -90,11 +90,11 @@ z_new = v(3, n);
 v_new = vertcat(x_new, y_new);
 v_new = vertcat(v_new, z_new);
 
-x_bar_back = zeros(7332, 1);
-y_bar_back = zeros(7332, 1);
+x_bar_back = zeros(8385, 1);
+y_bar_back = zeros(8385, 1);
 
 count = 0;
-for i = 1:7332
+for i = 1:8385
     count = count + 1;
     image_zero (1, 1) = 1;
     if ((ismember(v(1, i), x_mesh_back(:)) == 1) && (ismember(v(2, i), y_mesh_back(:)) == 1) && (ismember(v(3, i), z_mesh_back(:)) == 1))
@@ -124,10 +124,10 @@ for i = 1:7332
         y_bar_back(i) = max(y_bar_back);
     end
 end
-
 % for live stream
 % x_bar_new_norm = abs(x_bar_back)./1920;
 % y_bar_new_norm = abs(1 - (y_bar_back)./1218);
 
+% for recorded video
 x_bar_new_norm = abs(1 - (x_bar_back)./1920);
 y_bar_new_norm = abs((y_bar_back)./1208);
