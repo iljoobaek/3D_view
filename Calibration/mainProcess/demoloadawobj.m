@@ -27,7 +27,7 @@ fig=figure(4); % open a new figure
 % modelname='Final_calibration files/regular_rectangle/rectangular_mesh_measured_front.obj';
 % modelname='Final_calibration files/regular_rectangle/rectangular_mesh_measured_rear.obj';
 % modelname='Final_calibration files/regular_rectangle/rectangular_mesh_measured_left.obj';
-modelname='Final_calibration files/regular_rectangle/rectangular_mesh_measured_right.obj';
+% modelname='Final_calibration files/regular_rectangle/rectangular_mesh_measured_right.obj';
  
 % modelname='Final_calibration files/FB_wide_rectangle/rectangular_mesh_measured_front_wide_final.obj';
 % modelname='Final_calibration files/FB_wide_rectangle/rectangular_mesh_measured_rear_wide_final.obj';
@@ -48,6 +48,17 @@ modelname='Final_calibration files/regular_rectangle/rectangular_mesh_measured_r
 % modelname = "Final_calibration files/asymmetric/narrowL_normalR/new_rear.obj";
 % modelname = "Final_calibration files/asymmetric/narrowL_normalR/new_left.obj";
 % modelname = "Final_calibration files/asymmetric/narrowL_normalR/new_right.obj";
+
+% modelname = "Final_calibration files/new_narrow/narrow_front.obj";
+% modelname = "Final_calibration files/new_narrow/narrow_rear.obj";
+% modelname = "Final_calibration files/new_narrow/narrow_left.obj";
+% modelname = "Final_calibration files/new_narrow/narrow_right.obj";
+
+
+%modelname = "Final_calibration files/asymmetric/narrowL_FRwideR/narL_FRwR_front.obj";
+modelname = "Final_calibration files/asymmetric/narrowL_FRwideR/narL_FRwR_rear.obj";
+%modelname = "Final_calibration files/asymmetric/narrowL_FRwideR/narL_FRwR_left.obj";
+% modelname = "Final_calibration files/asymmetric/narrowL_FRwideR/narL_FRwR_right.obj";
 
 [v,F3]=loadawobj(modelname);
 

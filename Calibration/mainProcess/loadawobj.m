@@ -76,7 +76,7 @@ end
 
 fid = fopen(modelname,'r');
 if (fid<0)
-  error(['can not open file: ' modelname]);
+  error(['can not open file: '+ modelname]);
   return ;
 end
 
