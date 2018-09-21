@@ -468,7 +468,7 @@ int main(int argc, char** argv)
 	    vid_front = "../data/Evaluation/short/forbes_1920_1208_0_s.mp4";
 	    vid_left = "../data/Evaluation/short/forbes_1920_1208_1_s.mp4";
 	    vid_rear = "../data/Evaluation/short/forbes_1920_1208_2_s.mp4";
-	    vid_right = "../data/Evaluation/short/forbes_1920_1208_3.mp4";
+	    vid_right = "../data/Evaluation/short/forbes_1920_1208_3_s.mp4";
     }
     else if (video_res == -1) {
 	    vid_front = "../data/Testing_0808/forbes.h264_0";
