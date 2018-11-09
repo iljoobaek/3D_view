@@ -134,11 +134,18 @@ void init_obj_names() {
 	obj_names.push_back("../data/obj_files_0808/rectangular_mesh_measured_right.obj");
 	
     // mesh 1    
+    /*
     obj_names.push_back("../data/obj_files_0711/rect_narrow_mesh_front.obj");
 	obj_names.push_back("../data/obj_files_0711/rect_narrow_mesh_left.obj");
 	obj_names.push_back("../data/obj_files_0711/rect_narrow_mesh_rear.obj");
 	obj_names.push_back("../data/obj_files_0711/rect_narrow_mesh_right.obj");
-    
+    */
+
+    obj_names.push_back("../data/obj_files_0711/rectangular_mesh_measured_wideLR_front.obj");
+    obj_names.push_back("../data/obj_files_0711/rectangular_mesh_measured_wideLR_left.obj");
+    obj_names.push_back("../data/obj_files_0711/rectangular_mesh_measured_wideLR_rear.obj");
+    obj_names.push_back("../data/obj_files_0711/rectangular_mesh_measured_wideLR_right.obj");
+
     // mesh 2
     obj_names.push_back("../data/obj_files_0711/rectangular_mesh_measured_wideFB_front_final.obj");
 	obj_names.push_back("../data/obj_files_0711/rectangular_mesh_measured_wideFB_left_final.obj");
@@ -150,12 +157,17 @@ void init_obj_names() {
 	// obj_names.push_back("../obj_files_0711/rectangular_mesh_measured_wideLR_left.obj");
 	// obj_names.push_back("../obj_files_0711/rectangular_mesh_measured_wideLR_rear.obj");
 	// obj_names.push_back("../obj_files_0711/rectangular_mesh_measured_wideLR_right.obj");
+    
+    // mesh 4
+    obj_names.push_back("../data/obj_files_0808/FRwL_narR_front.obj");
+    obj_names.push_back("../data/obj_files_0808/FRwL_narR_left.obj");
+    obj_names.push_back("../data/obj_files_0808/FRwL_narR_rear.obj");
+    obj_names.push_back("../data/obj_files_0808/FRwL_narR_right.obj");
 
     obj_names.push_back("../data/obj_files_0808/new_front.obj");
     obj_names.push_back("../data/obj_files_0808/new_left.obj");
     obj_names.push_back("../data/obj_files_0808/new_rear.obj");
     obj_names.push_back("../data/obj_files_0808/new_right.obj");
-
 
     obj_names.push_back("../data/cadillac_chassis.obj");
 }
@@ -327,22 +339,27 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		case GLFW_KEY_8:	// mesh 0
 			change_mesh = 1;
 			mesh = 0;
-            cam_View = "N";
+            // cam_View = "N";
 			break;
 		case GLFW_KEY_9:	// mesh 1
 			change_mesh = 1;
 			mesh = 1;
-            cam_View = "S";
+            // cam_View = "S";
 			break;
 		case GLFW_KEY_0:	// mesh 2
 			change_mesh = 1;
 			mesh = 2;
-            cam_View = "E";
+            // cam_View = "E";
 			break;
-		case GLFW_KEY_P:	// mesh 3
+		case GLFW_KEY_U:	// mesh 3
 			change_mesh = 1;
 			mesh = 3;
 			break;
+		case GLFW_KEY_I:	// mesh 3
+			change_mesh = 1;
+			mesh = 4;
+			break;
+
 	}
 }
 
@@ -363,7 +380,8 @@ int main(int argc, char** argv)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// Open a window and create its OpenGL context
-	window = glfwCreateWindow( 1920, 1080, "3D Surround View", NULL, NULL);
+	// window = glfwCreateWindow( 1920, 1080, "3D Surround View", NULL, NULL);
+	window = glfwCreateWindow( 960, 540, "3D Surround View", NULL, NULL);
 	if( window == NULL ){
 		fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
 		getchar();
@@ -465,16 +483,22 @@ int main(int argc, char** argv)
 
     if (video_res == 0) {
         // 1920 x 1208 resolution
-	    vid_front = "../data/Evaluation/short/forbes_1920_1208_0_s.mp4";
-	    vid_left = "../data/Evaluation/short/forbes_1920_1208_1_s.mp4";
-	    vid_rear = "../data/Evaluation/short/forbes_1920_1208_2_s.mp4";
-	    vid_right = "../data/Evaluation/short/forbes_1920_1208_3_s.mp4";
+	    vid_front = "../data/Evaluation/forbes_1920_1208_0.mp4";
+	    vid_left = "../data/Evaluation/forbes_1920_1208_1.mp4";
+	    vid_rear = "../data/Evaluation/forbes_1920_1208_2.mp4";
+	    vid_right = "../data/Evaluation/forbes_1920_1208_3.mp4";
     }
     else if (video_res == -1) {
-	    vid_front = "../data/Testing_0808/forbes.h264_0";
+	    vid_front = "../data/Testing_0808/east_garage_1.h264_0";
+	    vid_left = "../data/Testing_0808/east_garage_1.h264_1";
+	    vid_rear = "../data/Testing_0808/east_garage_1.h264_2";
+        vid_right = "../data/Testing_0808/east_garage_1.h264_3";
+	    /*
+        vid_front = "../data/Testing_0808/forbes.h264_0";
 	    vid_left = "../data/Testing_0808/forbes.h264_1";
 	    vid_rear = "../data/Testing_0808/forbes.h264_2";
         vid_right = "../data/Testing_0808/forbes.h264_3";
+        */
     }    
     else if (video_res == 1) {
         // 1280 x 720 resolution
@@ -490,6 +514,20 @@ int main(int argc, char** argv)
 	    vid_rear = "../data/Evaluation/short/forbes_640_480_2_s.mp4";
 	    vid_right = "../data/Evaluation/short/forbes_640_480_3_s.mp4";
     }
+    
+    else if (video_res == 11) {
+	    vid_front = "../data/Testing_0808/par_parking_2.h264_0";
+	    vid_left = "../data/Testing_0808/par_parking_2.h264_1";
+	    vid_rear = "../data/Testing_0808/par_parking_2.h264_2";
+        vid_right = "../data/Testing_0808/par_parking_2.h264_3";
+    }    
+    
+    else if (video_res == 22) {
+	    vid_front = "../data/Testing_0808/sq_hill_tunnel.h264_0";
+	    vid_left = "../data/Testing_0808/sq_hill_tunnel.h264_1";
+	    vid_rear = "../data/Testing_0808/sq_hill_tunnel.h264_2";
+        vid_right = "../data/Testing_0808/sq_hill_tunnel.h264_3";
+    }    
     else {
         // 1920 x 1080 resolution h264
 	    vid_front = "../data/Testing_0808/forbes.h264_0";
