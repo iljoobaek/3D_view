@@ -93,7 +93,7 @@ T_upper = horzcat(part1_1, part1_2);
 T_lower = horzcat(part2_1, part2_2);
 T = vertcat(T_upper, T_lower);
 
-% calculate the inversion vector 
+% calculate the inversion vector
 c_x_back = T \ xp_back;
 c_y_back = T \ yp_back;
 
