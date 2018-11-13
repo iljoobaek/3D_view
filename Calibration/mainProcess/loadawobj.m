@@ -30,16 +30,6 @@ function [V,F3,F4]=loadawobj(modelname,opts)
 %   S=LOADAWOBJ('name.obj') will load obj into S
 %   patch('Vertices',S.v','Faces',S.f3','FaceColor','g');
 %
-% There is still a chance that obj files will not load. I
-% would be grateful for any reports and examples of those that fail.
-% See also LOADAWMTL.m DEMOLOADAWOBJ.m
-% and Anders Sandberg's
-% vertface2obj.m and saveobjmesh.m
-%
-% W.S. Harwin, University Reading, 2006,2010,2015-6.
-% Matlab BSD license
-% thanks also to Doug Hackett
-%
 
 version=0.32; % add 1 to get the matlab version
 if nargin <1 

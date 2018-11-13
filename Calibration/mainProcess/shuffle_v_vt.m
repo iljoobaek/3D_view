@@ -1,6 +1,9 @@
+% This file arranges the vt values for the mesh as per the order of v (and 
+% f) in the .OBJ file
 shuffled_vt_x = (-1) * ones(size(x_bar_new_norm, 1), 1);
 shuffled_vt_y = (-1) * ones(size(y_bar_new_norm, 1), 1);
 
+% Reads vt values
 local = obj.f.vt{size(F3, 2), 1};
 for i = 1 : size(F3, 2)
     for j = 1 : 3
@@ -12,6 +15,3 @@ for i = 1 : size(F3, 2)
        end
     end
 end
-
-% shuffled_vt_x = x_bar_new_norm;
-% shuffled_vt_y = y_bar_new_norm;
